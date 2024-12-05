@@ -14,4 +14,9 @@ contract ErrorTest is Test {
     function testFail() public {
         err.throwError();
     }
+
+    function testRevert() public {
+        vm.expectRevert();
+        err.throwError();
+    }
 }
