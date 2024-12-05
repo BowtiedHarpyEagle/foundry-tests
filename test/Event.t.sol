@@ -7,7 +7,7 @@ import {Event} from "../src/Event.sol";
 contract EventTest is Test {
     Event public e;
 
-    event Transfer(address from, address to, uint256 amount);
+    event Transfer(address indexed from, address indexed to, uint256 amount);
 
     function setUp() public {
         e = new Event();
