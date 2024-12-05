@@ -14,13 +14,20 @@ contract EventTest is Test {
     }
 
     function testEmitTransferEvent() public {
+        // function expectEmit(
+        //     bool checkTopic1,
+        //     bool checkTopic2,
+        //     bool checkTopic3,
+        //     bool checkData
+        // ) external;
 
+        // 1. Tell Foundry which data to check
+        // Check index 1, index 2 and data
         vm.expectEmit(true, true, false, true);
-
-        emit Transfer(address(this),address(123),456);
-
-        e.transfer(address(this),address(123),456);
-
+        // 2. Emit the expected event
+        emit Transfer(address(this), address(123), 456);
+        // 3. Call the function that should emit the event
+        e.transfer(address(this), address(123), 456);
     }
 
     function testEmitTransferManyEvent() public {}
