@@ -8,8 +8,18 @@ contract TimeTest is Test {
     Auction public auction;
     uint256 private startAt;
 
-    function setup() public {
+    // vm.warp sets block.timestamp to future time
+    // vm.roll sets block number
+    // skip increments current timestamp
+    // rewind decrements current timestamp
+
+    function setUp() public {
         auction = new Auction();
         startAt = block.timestamp;
+    }
+
+    function testBidFailsBeforeStartTime() public {
+        vm.expectRevert(bytes("auction has not started yet"));
+        auction.bid();
     }
 }
