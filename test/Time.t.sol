@@ -22,4 +22,9 @@ contract TimeTest is Test {
         vm.expectRevert(bytes("auction has not started yet"));
         auction.bid();
     }
+
+    function testBidSucceedsAfterStartTime() public {
+        vm.warp(startAt + 1 days);
+        auction.bid();
+    }
 }
