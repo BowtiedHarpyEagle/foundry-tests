@@ -27,4 +27,10 @@ contract TimeTest is Test {
         vm.warp(startAt + 1 days);
         auction.bid();
     }
+
+    function testBidFailsAfterEndTime() public {
+        vm.warp(startAt + 2 days);
+        vm.expectRevert(bytes("auction has ended"));
+        auction.bid();
+    }
 }
