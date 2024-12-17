@@ -33,4 +33,22 @@ contract TimeTest is Test {
         vm.expectRevert(bytes("auction has ended"));
         auction.bid();
     }
+
+    function testTimeStamp() public {
+
+        uint256 timestamp = block.timestamp;
+        // skip increments current timestamp
+        skip(100);
+        assert(timestamp + 100 == block.timestamp);
+        // rewind decrements current timestamp
+        rewind(10);
+        assert(timestamp + 90 == block.timestamp);
+    }
+
+    function testBlockNumber() public {
+     // vm.roll sets block number
+     uint256 blockNumber = block.number;
+     vm.roll(999);
+     assertEq(999, block.number);
+    }
 }
