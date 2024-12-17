@@ -25,6 +25,8 @@ contract WalletTest is Test {
     }
 
     function testSendEth() public {
+        uint256 startingBalance = address(wallet).balance;
+
         // deal(address, uint) - Set balance of address
         deal(address(1), 100);
         assertEq(address(1).balance, 100);
@@ -33,5 +35,14 @@ contract WalletTest is Test {
         assertEq(address(1).balance, 10);
 
         // hoax(address, uint) - deal + prank, Sets up a prank and set balance
+
+        deal(address(1), 123);
+        vm.prank(address(1));
+        _send(123);
+
+        hoax(address(1), 456);
+        _send(456);
+
+        assertEq(address(wallet).balance, startingBalance + 123 + 456);
     }
 }
