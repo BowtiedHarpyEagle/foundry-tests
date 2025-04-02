@@ -1,0 +1,29 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.18;
+
+import {Test} from "forge-std/Test.sol"; 
+import {Bit} from "../src/Bit.sol";
+
+// Topics:
+// Fuzz
+// assume and bound
+// stats 
+
+contract FuzzTest is Test { 
+    
+    Bit public b;
+
+    function setUp() public {
+        b = new Bit();
+    }
+
+    function testMostSignificantBitManual() public view{
+        assertEq(b.mostSignificantBit(0), 0);
+        assertEq(b.mostSignificantBit(1), 0);
+        assertEq(b.mostSignificantBit(2), 1);
+        assertEq(b.mostSignificantBit(4), 2);
+        assertEq(b.mostSignificantBit(8), 3);
+        assertEq(b.mostSignificantBit(16), 4);
+        assertEq(b.mostSignificantBit(type(uint256).max), 255);
+    }
+}
