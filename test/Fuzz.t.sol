@@ -41,6 +41,12 @@ contract FuzzTest is Test {
         // skip if x = 0
         vm.assume(x > 0);
         assertGt(x, 0);
+
+        // bound (input, min, max) - bound input between min and max 
+
+        x = bound(x, 1, 10);
+        assertGe(x, 1);
+        assertLe(x, 10);
         
         uint i = b.mostSignificantBit(x);
         assertEq(i, mostSignificantBit(x));
