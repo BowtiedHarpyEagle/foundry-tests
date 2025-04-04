@@ -8,6 +8,9 @@ import {Bit} from "../src/Bit.sol";
 // Fuzz
 // assume and bound
 // stats 
+// runs: number of fuzz tests run
+// mean (nu) : average gas used per run
+// median (~) : median gas used per run
 
 contract FuzzTest is Test { 
     
@@ -47,7 +50,7 @@ contract FuzzTest is Test {
         x = bound(x, 1, 10);
         assertGe(x, 1);
         assertLe(x, 10);
-        
+
         uint i = b.mostSignificantBit(x);
         assertEq(i, mostSignificantBit(x));
     }
