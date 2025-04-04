@@ -22,6 +22,11 @@ contract FuzzTest is Test {
 
     function mostSignificantBit(uint256 x) private pure returns (uint256) {
         uint256 i = 0;
+
+        // the following shifts the binary number to right, eliminating 
+        // the least significant bit, and counts how many times it can 
+        // do that before the number reaches 0. 
+
         while ((x >>= 1) > 0) {
             i++;            
         }
