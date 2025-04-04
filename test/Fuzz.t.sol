@@ -36,6 +36,12 @@ contract FuzzTest is Test {
     }
 
     function testLeastSignificantBitFuzz(uint256 x) public view{
+        // assume if false; fuzz test will skip and try another random value
+        // for another fuzz test
+        // skip if x = 0
+        vm.assume(x > 0);
+        assertGt(x, 0);
+        
         uint i = b.mostSignificantBit(x);
         assertEq(i, mostSignificantBit(x));
     }
