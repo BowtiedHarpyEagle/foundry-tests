@@ -61,6 +61,6 @@ contract WETH_Handler_Based_Invariant_Test is Test {
     }
 
     function invariant_eth_balance() public view {
-        assertGt(address(weth).balance, handler.wethBalance());
+        assertGe(address(weth).balance, handler.wethBalance());
     }
 }
