@@ -44,6 +44,10 @@ contract Handler is CommonBase, StdCheats, StdUtils {
         weth.withdraw(amount);
     }
 
+    function fail() public pure {
+        revert("fail");
+    }
+
 }
 
 contract WETH_Handler_Based_Invariant_Test is Test {
@@ -58,16 +62,16 @@ contract WETH_Handler_Based_Invariant_Test is Test {
         deal(address(handler), 100 * 1e18);
         targetContract(address(handler));
 
-        bytes4[] memory selectors = new bytes4[](3);
-        selectors[0] = Handler.sendToFallback.selector;
-        selectors[1] = Handler.deposit.selector;
-        selectors[2] = Handler.withdraw.selector;
-        targetSelector(
-            FuzzSelector({
-                addr: address(handler),
-                selectors: selectors              
-            })
-        );
+        // bytes4[] memory selectors = new bytes4[](3);
+        // selectors[0] = Handler.sendToFallback.selector;
+        // selectors[1] = Handler.deposit.selector;
+        // selectors[2] = Handler.withdraw.selector;
+        // targetSelector(
+        //     FuzzSelector({
+        //         addr: address(handler),
+        //         selectors: selectors              
+        //     })
+        // );
 
     }
 
