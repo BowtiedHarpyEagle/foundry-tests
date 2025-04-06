@@ -58,6 +58,17 @@ contract WETH_Handler_Based_Invariant_Test is Test {
         deal(address(handler), 100 * 1e18);
         targetContract(address(handler));
 
+        bytes4[] memory selectors = new bytes4[](3);
+        selectors[0] = Handler.sendToFallback.selector;
+        selectors[1] = Handler.deposit.selector;
+        selectors[2] = Handler.withdraw.selector;
+        targetSelector(
+            FuzzSelector({
+                addr: address(handler),
+                selectors: selectors              
+            })
+        );
+
     }
 
     function invariant_eth_balance() public view {
