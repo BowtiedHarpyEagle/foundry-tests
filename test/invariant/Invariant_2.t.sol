@@ -44,7 +44,8 @@ contract Handler is CommonBase, StdCheats, StdUtils {
         weth.withdraw(amount);
     }
 
-    function fail() public pure {
+    // if I add "pure" modifier, foundry skips this test
+    function fail() public {
         revert("fail");
     }
 
